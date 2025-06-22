@@ -11,15 +11,16 @@ import AuthModel from "./AuthModel";
 import { DynamicForm } from "./form/DynamicForm";
 import DynamicInput from "./form/DynamicInput";
 import InputRange from "./form/InputRange";
-import Select from "./form/Select";
 import { FormControl, FormItem, FormLabel, FormMessage } from "./ui/form";
 import Section from "./ui/Section";
 import TitleSection from "./ui/TitleSection";
-import UseDrawerDialog from "./UseDrawerDialog";
 
 import LocationIcon from "@/assets/icons/location.svg";
+import { useUser } from "@/context/UserContext";
 import Image from "next/image";
 import ButtonHover from "./buttons/ButtonHover";
+import AuthDrawerDialog from "./drawerDialog/AuthDrawerDialog";
+import UseSelect from "./UsedShadcn/UseSelect";
 
 const inputs: IInput<predictLandPricesValues>[] = [
   {
@@ -68,7 +69,7 @@ const RenderInput = (
           {input.label}
         </FormLabel>
         {input.type === "range" && (
-          <span className="text-primary font-semibold tabular-nums">
+          <span className="text-primary font-semibold tabular-nums max-md:text-xs">
             {inputRangeWatch}
           </span>
         )}
@@ -83,7 +84,7 @@ const RenderInput = (
             onChange={(e) => field.onChange(e.target.value)}
           />
         ) : input.type === "select" ? (
-          <Select
+          <UseSelect
             items={input.selectItems!}
             value={field.value}
             onChange={field.onChange}
@@ -107,6 +108,8 @@ const RenderInput = (
 };
 
 function PredictLandPricesSection() {
+  const { isUserReady } = useUser();
+
   const onSubmitAction = (data: predictLandPricesValues) => {
     console.log(data);
   };
@@ -129,24 +132,23 @@ function PredictLandPricesSection() {
             formClassName="flex items-center gap-4 md:gap-8 space-y-0 flex-wrap"
             renderInput={RenderInput}
             customSubmit={(form) => (
-              <UseDrawerDialog
+              <AuthDrawerDialog
                 trigger={
                   <ButtonHover
                     type={"submit"}
-                    className="mt-4 h-14 max-w-[178px] px-8 max-md:max-w-full max-sm:text-xs md:mt-8"
+                    containerClassName="max-w-[178px] max-md:max-w-full md:mt-8 mt-4 w-full"
+                    className="h-14 px-8 max-sm:text-xs"
                     disabled={
-                      form.formState.isSubmitting || !form.formState.isValid
+                      form.formState.isSubmitting ||
+                      !form.formState.isValid ||
+                      !isUserReady // User can't click in button when user data start loading
                     }
-                    yAnimation={-30}
+                    disabledMobile
                   >
                     Predict Price
                   </ButtonHover>
                 }
                 content={<AuthModel />}
-                enableDrawer={true}
-                titleScreenReader="Signup Dialog"
-                descriptionScreenReader="Signup Dialog"
-                contentClassName="rounded-2xl p-12"
               />
             )}
           />

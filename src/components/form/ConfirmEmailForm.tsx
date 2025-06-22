@@ -32,19 +32,19 @@ const RenderInputLogin = (
           <InputOTPGroup className="mx-auto w-fit gap-x-6">
             <InputOTPSlot
               index={0}
-              className="h-16 w-16 rounded-[8px] border text-[26px] font-semibold"
+              className="h-12 w-12 rounded-[8px] border text-[26px] font-semibold md:h-16 md:w-16"
             />
             <InputOTPSlot
               index={1}
-              className="h-16 w-16 rounded-[8px] border text-[26px] font-semibold"
+              className="h-12 w-12 rounded-[8px] border text-[26px] font-semibold md:h-16 md:w-16"
             />
             <InputOTPSlot
               index={2}
-              className="h-16 w-16 rounded-[8px] border text-[26px] font-semibold"
+              className="h-12 w-12 rounded-[8px] border text-[26px] font-semibold md:h-16 md:w-16"
             />
             <InputOTPSlot
               index={3}
-              className="h-16 w-16 rounded-[8px] border text-[26px] font-semibold"
+              className="h-12 w-12 rounded-[8px] border text-[26px] font-semibold md:h-16 md:w-16"
             />
           </InputOTPGroup>
         </InputOTP>
@@ -80,7 +80,7 @@ function ConfirmEmailForm({
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 max-md:text-sm">
       <div className="flex flex-col items-center justify-center gap-3 text-center">
         <p className="text-[#52565B]">Enter the 4-digit OTP sent to</p>
         <div className="text-default flex items-center justify-center gap-1.5">

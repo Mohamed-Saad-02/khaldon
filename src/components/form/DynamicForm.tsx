@@ -77,7 +77,7 @@ function DynamicForm<T extends Record<string, string | number | Date>>({
         ) : (
           <Button
             type="submit"
-            className={cn("w-full max-sm:text-xs", buttonClass)}
+            className={cn("w-full", buttonClass)}
             disabled={form.formState.isSubmitting || !form.formState.isValid}
           >
             {submitButtonText}

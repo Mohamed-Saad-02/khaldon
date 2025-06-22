@@ -191,7 +191,7 @@ body::-webkit-scrollbar-track {
     0px 16px 16px -8px rgba(12, 12, 13, 0.1),
     0px 4px 4px -4px rgba(12, 12, 13, 0.05);
 
-  @apply disabled:cursor-not-allowed disabled:bg-[#F9F9FB] disabled:text-lg disabled:text-[#B3B3B3];
+  @apply disabled:cursor-not-allowed disabled:bg-[#F9F9FB] disabled:text-lg disabled:text-[#B3B3B3] disabled:max-md:text-sm;
 }
 
 @layer base {

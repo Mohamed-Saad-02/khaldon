@@ -37,7 +37,7 @@ function ForgotPasswordForm({
         defaultValues={defaultValues}
         onSubmitAction={onSubmitAction}
         submitButtonText="Send OTP"
-        buttonClass="w-full max-sm:text-xs mt-9"
+        buttonClass="w-full md:mt-9"
       />
     </div>
   );

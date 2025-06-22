@@ -20,18 +20,7 @@ import {
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-
-type UseDrawerDialogProps = {
-  trigger: React.ReactNode;
-  content:
-    | React.ReactElement<{ onClose?: () => void }>
-    | ((props: { onClose: () => void }) => React.ReactNode);
-  titleScreenReader: string;
-  descriptionScreenReader?: string;
-  contentClassName?: string;
-
-  enableDrawer?: boolean;
-};
+import { UseDrawerDialogProps } from "@/types";
 
 const UseDrawerDialog = ({
   trigger,

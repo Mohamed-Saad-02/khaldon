@@ -18,7 +18,7 @@ function Button({
       className={cn(
         "bg-primary hover:bg-primary-hover flex h-14 items-center justify-center rounded-[99px] font-semibold text-white transition-colors duration-300",
         "disabled",
-        "max-md:h-12 max-sm:h-10",
+        "max-md:h-12 max-md:text-sm max-sm:h-10",
         className,
       )}
       {...props}

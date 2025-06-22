@@ -11,7 +11,6 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 interface ButtonHoverProps extends ComponentProps<"button"> {
   disabledMobile?: boolean;
   containerClassName?: string;
-  yAnimation?: number;
   onClick?: () => void;
 }
 
@@ -21,7 +20,6 @@ function ButtonHover({
   containerClassName,
   className,
   disabledMobile = false,
-  yAnimation = -55,
   onClick,
   ...props
 }: ButtonHoverProps) {
@@ -43,7 +41,7 @@ function ButtonHover({
               <motion.div
                 key="hover-stars"
                 initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: yAnimation }}
+                animate={{ opacity: 1, y: -55 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
                 className="space-y-2"

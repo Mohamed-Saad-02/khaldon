@@ -11,6 +11,7 @@ import { DynamicForm } from "./DynamicForm";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import DynamicInput from "./DynamicInput";
 import { FormControl, FormItem, FormLabel, FormMessage } from "../ui/form";
+import { useUser } from "@/context/UserContext";
 
 type TabType = {
   setTab: Dispatch<SetStateAction<"signup" | "login">>;
@@ -22,7 +23,7 @@ const Tab = ({ setTab, currentTab, tab }: TabType) => (
   <button
     onClick={() => setTab(tab)}
     className={cn(
-      "flex h-12 flex-1 items-center justify-center rounded border font-medium transition-colors duration-300",
+      "flex h-12 flex-1 items-center justify-center rounded border font-medium transition-colors duration-300 max-md:text-sm",
       currentTab === tab
         ? "bg-primary/10 border-primary/20 text-[#334107]"
         : "border-transparent text-[#52565B]",
@@ -83,6 +84,8 @@ function SignForm({
 }: {
   selectSection: (section: SectionType) => void;
 }) {
+  const { saveUser } = useUser();
+
   const [tab, setTab] = useState<"signup" | "login">("signup");
 
   const onSubmitAction = (
@@ -90,7 +93,12 @@ function SignForm({
     form: UseFormReturn<signupValues | loginValues>,
   ) => {
     console.log(data);
-    console.log(form);
+
+    saveUser({
+      name: "Mohamed Saad",
+      id: "1",
+      email: data.email,
+    });
   };
 
   return (
@@ -121,7 +129,7 @@ function SignForm({
             defaultValues={defaultValues}
             onSubmitAction={onSubmitAction}
             submitButtonText="Signup"
-            buttonClass="w-full max-sm:text-xs mt-[68px]"
+            buttonClass="mt-6 md:mt-[68px]"
           />
         )}
       </div>

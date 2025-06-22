@@ -8,24 +8,22 @@ import {
   Select as ShadcnSelect,
 } from "@/components/ui/select";
 import { cn } from "@/lib";
-import { ReactNode } from "react";
+import { UseSelectProps } from "@/types";
 
-interface SelectProps {
-  items: { value: string; label: string }[];
-  value?: string;
-  onChange: (value: string) => void;
-  className?: string;
-  icon?: ReactNode;
-}
-
-function Select({ items, value, onChange, className, icon }: SelectProps) {
+function UseSelect({
+  items,
+  value,
+  onChange,
+  className,
+  icon,
+}: UseSelectProps) {
   return (
-    <div className="border-input flex h-14 items-center gap-2 rounded-[8px] border p-3">
+    <div className="border-input flex h-12 items-center gap-2 rounded-[8px] border p-3 md:h-14">
       {icon && icon}
       <ShadcnSelect value={value} onValueChange={(v) => onChange(v as string)}>
         <SelectTrigger
           className={cn(
-            "text-default min-h-12 border-none shadow-none",
+            "text-default min-h-12 border-none text-sm shadow-none md:text-base",
             className,
           )}
         >
@@ -43,4 +41,4 @@ function Select({ items, value, onChange, className, icon }: SelectProps) {
   );
 }
 
-export default Select;
+export default UseSelect;

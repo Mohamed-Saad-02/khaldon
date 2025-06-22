@@ -52,7 +52,7 @@ function AuthModel({ onClose }: { onClose?: () => void }) {
           <Image
             src={smsNotificationIcon}
             alt="sms notification icon"
-            className="-mb-8"
+            className="-mb-4 max-md:size-24 md:-mb-8"
           />
         ),
         title: "Confirm your mail!",

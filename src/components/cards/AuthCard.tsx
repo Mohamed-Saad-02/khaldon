@@ -24,10 +24,14 @@ function AuthCard({
     >
       {icon}
 
-      <motion.div className="mt-16 w-full" layout>
-        <div className="mb-8 space-y-2 text-center">
-          <h4 className="text-2xl font-bold">{title}</h4>
-          {subtitle && <p className="text-[#757575]">{subtitle}</p>}
+      <motion.div className="mt-6 w-full sm:mt-10 md:mt-16" layout>
+        <div className="mb-4 space-y-2 text-center sm:mb-6 md:mb-8">
+          <h4 className="font-bold md:text-2xl">{title}</h4>
+          {subtitle && (
+            <p className="text-xs text-[#757575] sm:text-sm md:text-base">
+              {subtitle}
+            </p>
+          )}
         </div>
 
         <AnimatePresence mode="wait">

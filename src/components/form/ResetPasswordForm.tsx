@@ -59,7 +59,7 @@ const RenderInputLogin = (
       <FormMessage />
 
       {index === inputs.length - 1 && (
-        <ul className="mt-4 space-y-4 text-sm">
+        <ul className="mt-4 space-y-3 text-xs md:space-y-4 md:text-sm">
           <li className="font-semibold">Your Password must have at least:</li>
           <Rule check={minLength} text="8 characters" />
           <Rule
@@ -102,7 +102,7 @@ function ResetPasswordForm({
           defaultValues={defaultValues}
           onSubmitAction={onSubmitAction}
           submitButtonText="Reset Password"
-          buttonClass="w-full max-sm:text-xs mt-6 -mb-4"
+          buttonClass="w-full max-sm:text-xs mt-6 md:-mb-4"
           renderInput={RenderInputLogin}
           actions={{ selectSection }}
         />
