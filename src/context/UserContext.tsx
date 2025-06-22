@@ -26,7 +26,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       try {
         setUser(JSON.parse(stored));
       } catch (err) {
-        console.error("Invalid user data in localStorage");
+        console.error("Invalid user data in localStorage", err);
       } finally {
         setIsUserReady(true);
       }

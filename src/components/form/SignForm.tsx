@@ -1,3 +1,4 @@
+import { useUser } from "@/context/UserContext";
 import { cn } from "@/lib";
 import {
   loginSchema,
@@ -7,11 +8,10 @@ import {
 } from "@/lib/validator";
 import { IInput, SectionType } from "@/types";
 import { Dispatch, SetStateAction, useState } from "react";
-import { DynamicForm } from "./DynamicForm";
-import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
-import DynamicInput from "./DynamicInput";
+import { ControllerRenderProps } from "react-hook-form";
 import { FormControl, FormItem, FormLabel, FormMessage } from "../ui/form";
-import { useUser } from "@/context/UserContext";
+import { DynamicForm } from "./DynamicForm";
+import DynamicInput from "./DynamicInput";
 
 type TabType = {
   setTab: Dispatch<SetStateAction<"signup" | "login">>;
@@ -90,7 +90,7 @@ function SignForm({
 
   const onSubmitAction = (
     data: signupValues | loginValues,
-    form: UseFormReturn<signupValues | loginValues>,
+    // form: UseFormReturn<signupValues | loginValues>,
   ) => {
     console.log(data);
 
