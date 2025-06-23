@@ -1,5 +1,6 @@
 import { ComponentProps, ReactNode } from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
+import * as PopoverPrimitive from "@radix-ui/react-popover";
 
 export interface UseAvatarProps {
   avatar?: ComponentProps<typeof AvatarPrimitive.Root>;
@@ -28,4 +29,13 @@ export interface UseSelectProps {
   onChange: (value: string) => void;
   className?: string;
   icon?: ReactNode;
+}
+
+export interface UsePopoverProps {
+  trigger: ReactNode;
+  content: ReactNode;
+
+  popover?: ComponentProps<typeof PopoverPrimitive.Root>;
+  popoverTrigger?: ComponentProps<typeof PopoverPrimitive.Trigger>;
+  popoverContent?: ComponentProps<typeof PopoverPrimitive.Content>;
 }

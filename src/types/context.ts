@@ -5,4 +5,5 @@ export interface UserContextType {
   setUser: (user: User | null) => void;
   saveUser: (user: User) => void;
   isUserReady: boolean;
+  logout: () => void;
 }

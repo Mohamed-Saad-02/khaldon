@@ -60,8 +60,6 @@ const RenderInput = (
 ) => {
   const inputRangeWatch = form?.watch("year");
 
-  console.log(inputRangeWatch);
-
   return (
     <FormItem className="max-sm:w-full sm:flex-1">
       <div className="flex items-center justify-between">

@@ -20,6 +20,15 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("user", JSON.stringify(user));
   };
 
+  const logout = () => {
+    if (isUserReady && !user) return;
+
+    setUser(null);
+    localStorage.removeItem("user");
+  };
+
+  console.log(isUserReady);
+
   useLayoutEffect(() => {
     const stored = localStorage.getItem("user");
     if (stored) {
@@ -34,7 +43,9 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser, saveUser, isUserReady }}>
+    <UserContext.Provider
+      value={{ user, setUser, saveUser, isUserReady, logout }}
+    >
       {children}
     </UserContext.Provider>
   );
