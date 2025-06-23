@@ -13,7 +13,8 @@ import Image from "next/image";
 import ConfirmEmailForm from "./form/ConfirmEmailForm";
 import ResetPasswordForm from "./form/ResetPasswordForm";
 
-function AuthModel({ onClose }: { onClose?: () => void }) {
+// function AuthModel({ onClose }: { onClose?: () => void }) {
+function AuthModel() {
   const [section, setSection] = useState<SectionType>("signup");
 
   const handleSectionChange = (section: SectionType) => {
@@ -68,12 +69,7 @@ function AuthModel({ onClose }: { onClose?: () => void }) {
           <Logo className="xl:h-[72px] xl:w-[230px]" width={230} height={72} />
         ),
         title: "Reset Password",
-        children: (
-          <ResetPasswordForm
-            selectSection={handleSectionChange}
-            closeDialog={onClose}
-          />
-        ),
+        children: <ResetPasswordForm selectSection={handleSectionChange} />,
       },
     };
   }, []);
