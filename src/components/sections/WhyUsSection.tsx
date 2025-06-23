@@ -1,6 +1,4 @@
 import { routes } from "@/routes";
-import Section from "./ui/Section";
-import TitleSection from "./ui/TitleSection";
 
 import DiagramIcon from "@/assets/icons/diagram.svg";
 import DocumentDownload from "@/assets/icons/document-download.svg";
@@ -9,7 +7,9 @@ import TickCircleIcon from "@/assets/icons/tick-circle.svg";
 import WhyUsImage from "@/assets/images/whyus.webp";
 
 import Image from "next/image";
-import WhyUsCard from "./cards/WhyUsCard";
+import Section from "../ui/Section";
+import TitleSection from "../ui/TitleSection";
+import WhyUsCard from "../cards/WhyUsCard";
 
 const WHY_US_CARDS = [
   {

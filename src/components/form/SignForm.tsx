@@ -1,3 +1,4 @@
+import { defaultValuesSignForm, inputsSignForm } from "@/constants";
 import { useUser } from "@/context/UserContext";
 import { cn } from "@/lib";
 import {
@@ -6,12 +7,10 @@ import {
   signupSchema,
   signupValues,
 } from "@/lib/validator";
-import { IInput, SectionType } from "@/types";
+import { SectionType } from "@/types";
 import { Dispatch, SetStateAction, useState } from "react";
-import { ControllerRenderProps } from "react-hook-form";
-import { FormControl, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { DynamicForm } from "./DynamicForm";
-import DynamicInput from "./DynamicInput";
+import { RenderInputLogin } from "./renderInputs/RenderInputSign";
 
 type TabType = {
   setTab: Dispatch<SetStateAction<"signup" | "login">>;
@@ -32,52 +31,6 @@ const Tab = ({ setTab, currentTab, tab }: TabType) => (
     {tab === "login" ? "Login" : "Create an account"}
   </button>
 );
-
-const inputs: IInput<signupValues | loginValues>[] = [
-  {
-    formName: "email",
-    label: "Email",
-    type: "email",
-    placeholder: "Enter your email",
-    autoComplete: "email",
-  },
-  {
-    formName: "password",
-    label: "Password",
-    type: "password",
-    placeholder: "Enter your password",
-    autoComplete: "current-password",
-  },
-];
-
-const defaultValues = { email: "", password: "" };
-
-const RenderInputLogin = (
-  input: IInput<signupValues | loginValues>,
-  field: ControllerRenderProps<signupValues | loginValues>,
-  index: number,
-  actions?: Record<string, (...args: unknown[]) => unknown>,
-) => {
-  return (
-    <FormItem className="gap-1">
-      <FormLabel htmlFor={input.formName}>{input.label}</FormLabel>
-      <FormControl>
-        <DynamicInput input={input} field={field} id={input.formName} />
-      </FormControl>
-      <FormMessage />
-
-      {index === inputs.length - 1 && (
-        <button
-          type="button"
-          className="text-default ms-auto mt-2 w-fit text-sm"
-          onClick={() => actions?.selectSection("forgotPassword")}
-        >
-          Forgot Password?
-        </button>
-      )}
-    </FormItem>
-  );
-};
 
 function SignForm({
   selectSection,
@@ -112,9 +65,9 @@ function SignForm({
         {tab === "login" ? (
           <DynamicForm
             key={tab}
-            inputs={inputs}
+            inputs={inputsSignForm}
             formSchema={loginSchema}
-            defaultValues={defaultValues}
+            defaultValues={defaultValuesSignForm}
             onSubmitAction={onSubmitAction}
             submitButtonText="Login"
             buttonClass="w-full max-sm:text-xs mt-9"
@@ -124,9 +77,9 @@ function SignForm({
         ) : (
           <DynamicForm
             key={tab}
-            inputs={inputs}
+            inputs={inputsSignForm}
             formSchema={signupSchema}
-            defaultValues={defaultValues}
+            defaultValues={defaultValuesSignForm}
             onSubmitAction={onSubmitAction}
             submitButtonText="Signup"
             buttonClass="mt-6 md:mt-[68px]"

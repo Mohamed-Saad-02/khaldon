@@ -1,8 +1,8 @@
 import Container from "@/components/ui/Container";
 
-import HeroSection from "@/components/HeroSection";
-import PredictLandPricesSection from "@/components/PredictLandPricesSection";
-import WhyUsSection from "@/components/WhyUsSection";
+import PredictLandPricesSection from "@/components/sections/PredictLandPricesSection";
+import HeroSection from "@/components/sections/HeroSection";
+import WhyUsSection from "@/components/sections/WhyUsSection";
 
 function Home() {
   return (

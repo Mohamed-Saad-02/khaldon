@@ -1,6 +1,3 @@
-"use client";
-
-import AuthModel from "../AuthModel";
 import AuthDrawerDialog from "../drawerDialog/AuthDrawerDialog";
 
 function Signup() {
@@ -11,7 +8,6 @@ function Signup() {
           Signup
         </button>
       }
-      content={<AuthModel />}
     />
   );
 }

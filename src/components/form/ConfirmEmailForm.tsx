@@ -1,67 +1,15 @@
 import { confirmEmailSchema, confirmEmailValues } from "@/lib/validator";
-import { IInput, SectionType } from "@/types";
-import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
-import { FormControl, FormItem, FormMessage } from "../ui/form";
+import { SectionType } from "@/types";
+import { UseFormReturn } from "react-hook-form";
 import { DynamicForm } from "./DynamicForm";
 
 import smsIcon from "@/assets/icons/smsIcon.svg";
+import {
+  defaultValuesConfirmEmailForm,
+  inputsConfirmEmailForm,
+} from "@/constants";
 import Image from "next/image";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
-
-const inputs: IInput<confirmEmailValues>[] = [
-  {
-    formName: "otp",
-    label: "OTP",
-    type: "number",
-    placeholder: "Enter your OTP",
-    autoComplete: "email",
-  },
-];
-
-const defaultValues = { otp: "" };
-
-const RenderInputLogin = (
-  _input: IInput<confirmEmailValues>,
-  field: ControllerRenderProps<confirmEmailValues>,
-  index: number,
-) => {
-  return (
-    <FormItem className="gap-1">
-      <FormControl>
-        <InputOTP maxLength={4} {...field}>
-          <InputOTPGroup className="mx-auto w-fit gap-x-6">
-            <InputOTPSlot
-              index={0}
-              className="h-12 w-12 rounded-[8px] border text-[26px] font-semibold md:h-16 md:w-16"
-            />
-            <InputOTPSlot
-              index={1}
-              className="h-12 w-12 rounded-[8px] border text-[26px] font-semibold md:h-16 md:w-16"
-            />
-            <InputOTPSlot
-              index={2}
-              className="h-12 w-12 rounded-[8px] border text-[26px] font-semibold md:h-16 md:w-16"
-            />
-            <InputOTPSlot
-              index={3}
-              className="h-12 w-12 rounded-[8px] border text-[26px] font-semibold md:h-16 md:w-16"
-            />
-          </InputOTPGroup>
-        </InputOTP>
-      </FormControl>
-      <FormMessage />
-
-      {index === inputs.length - 1 && (
-        <div className="mt-8 flex items-center justify-between">
-          <p className="text-[#B3B3B3]">Didn&apos;t get the OTP?</p>
-          <button type="button" className="text-default">
-            Resend OTP via Email
-          </button>
-        </div>
-      )}
-    </FormItem>
-  );
-};
+import { RenderInputConfirmEmail } from "./renderInputs";
 
 function ConfirmEmailForm({
   selectSection,
@@ -97,13 +45,13 @@ function ConfirmEmailForm({
 
       <div className="mt-8 space-y-6">
         <DynamicForm
-          inputs={inputs}
+          inputs={inputsConfirmEmailForm}
           formSchema={confirmEmailSchema}
-          defaultValues={defaultValues}
+          defaultValues={defaultValuesConfirmEmailForm}
           onSubmitAction={onSubmitAction}
           submitButtonText="Confirm OTP"
           buttonClass="w-full max-sm:text-xs mt-8"
-          renderInput={RenderInputLogin}
+          renderInput={RenderInputConfirmEmail}
           actions={{ selectSection }}
         />
       </div>

@@ -25,7 +25,7 @@ function Nav() {
 
   const toggleNav = () => setIsNavActive((prev) => !prev);
 
-  if (!isUserReady) return <Skeleton className="bg-secondary h-10 w-[285px]" />;
+  if (!isUserReady) return <Skeleton className="h-10 w-[285px]" />;
 
   return (
     <nav>

@@ -4,8 +4,8 @@ import LandingImage from "@/assets/images/landing.webp";
 import { routes } from "@/routes";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
-import TryNow from "./buttons/TryNow";
-import Section from "./ui/Section";
+import Section from "../ui/Section";
+import TryNow from "../buttons/TryNow";
 
 const IconBadge = ({ src, alt }: { src: StaticImport; alt: string }) => (
   <span className="bg-primary/15 inline-flex h-12 w-12 items-center justify-center rounded-full align-middle md:h-20 md:w-[116px]">
