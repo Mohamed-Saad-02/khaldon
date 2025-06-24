@@ -40,9 +40,11 @@ const mokeData = {
 };
 
 export const predictLandPrices = (
-  _dataForm: predictLandPricesValues | null,
+  dataForm: predictLandPricesValues | null,
 ): Promise<Data> => {
-  return new Promise((resolve, reject) => {
+  console.log(dataForm);
+
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve(mokeData);
     }, 3000);
