@@ -12,10 +12,9 @@
   --link: #616161;
   --title: #0d0d0d;
   --default: #1e1e1e;
-  --shadow-land-price:
-    0px 18px 40px 0px #9c9c9c1a, 0px 73px 73px 0px #9c9c9c17,
-    0px 163px 98px 0px #9c9c9c0d, 0px 291px 116px 0px #9c9c9c03,
-    0px 454px 127px 0px #9c9c9c00;
+  --shadow-land-price: 0px 10px 30px #9c9c9c1a, 0px 30px 50px #9c9c9c0d;
+  --shadow-secondary: 0px 12px 27px 0px #cccccc1a, 0px 50px 50px 0px #cccccc17;
+
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -62,6 +61,7 @@
   --font-sans: var(--font-plus-jakarta-sans);
 
   --shadow-land-price: var(--shadow-land-price);
+  --shadow-secondary: var(--shadow-secondary);
 
   --color-sidebar-ring: var(--sidebar-ring);
 
@@ -128,30 +128,6 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-body {
-  @apply bg-background text-txt;
-}
-
-button {
-  @apply cursor-pointer;
-}
-
-body::-webkit-scrollbar {
-  @apply w-2;
-}
-
-body::-webkit-scrollbar-thumb {
-  @apply bg-primary rounded-lg transition-all duration-300;
-}
-
-body::-webkit-scrollbar-thumb:hover {
-  @apply bg-primary-hover;
-}
-
-body::-webkit-scrollbar-track {
-  @apply bg-muted;
-}
-
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -186,6 +162,41 @@ body::-webkit-scrollbar-track {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-txt;
+  }
+
+  body::selection {
+    @apply bg-primary/90 text-primary-foreground;
+  }
+}
+
+button {
+  @apply cursor-pointer;
+}
+
+/* Scrollbar */
+body::-webkit-scrollbar {
+  @apply w-2;
+}
+
+body::-webkit-scrollbar-thumb {
+  @apply bg-primary rounded-lg transition-all duration-300;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-hover;
+}
+
+body::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+/* Button */
 .disabled:disabled {
   box-shadow:
     0px 16px 16px -8px rgba(12, 12, 13, 0.1),
@@ -194,33 +205,22 @@ body::-webkit-scrollbar-track {
   @apply disabled:cursor-not-allowed disabled:bg-[#F9F9FB] disabled:text-lg disabled:text-[#B3B3B3] disabled:max-md:text-sm;
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
 /* Custom Range Slider */
-
-/* إزالة النمط الافتراضي */
 .custom-range {
   @apply appearance-none outline-none;
 }
 
-/* المسار (Track) */
+/* Track */
 .custom-range::-webkit-slider-runnable-track {
   @apply bg-primary/15 h-2 rounded-full;
 }
 
-/* المؤشر (Thumb) */
+/* Thumb */
 .custom-range::-webkit-slider-thumb {
   @apply bg-primary -mt-1 h-4 w-4 cursor-pointer appearance-none rounded-full transition-all duration-200 ease-in-out;
 }
 
-/* دعم Firefox */
+/* Firefox */
 .custom-range::-moz-range-track {
   @apply bg-primary/15 h-2 rounded-full;
 }
@@ -229,7 +229,7 @@ body::-webkit-scrollbar-track {
   @apply bg-primary h-4 w-4 cursor-pointer rounded-full border-none;
 }
 
-/* دعم IE */
+/* IE */
 .custom-range::-ms-track {
   @apply h-2 border-transparent bg-transparent text-transparent;
 }
@@ -244,4 +244,20 @@ body::-webkit-scrollbar-track {
 
 .custom-range::-ms-thumb {
   @apply bg-primary h-4 w-4 cursor-pointer rounded-full border-none;
+}
+
+/* Animation Shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.shimmer-effect {
+  animation: shimmer 4s infinite linear;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
 }

@@ -27,8 +27,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem("user");
   };
 
-  console.log(isUserReady);
-
   useLayoutEffect(() => {
     const stored = localStorage.getItem("user");
     if (stored) {

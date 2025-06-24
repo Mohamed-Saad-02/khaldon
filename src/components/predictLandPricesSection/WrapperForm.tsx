@@ -14,15 +14,15 @@ import {
   defaultValuesPredictLandPricesForm,
 } from "@/constants";
 
-function WrapperForm() {
-  const { isUserReady } = useUser();
-
-  const onSubmitAction = (data: predictLandPricesValues) => {
-    console.log(data);
-  };
+function WrapperForm({
+  onSubmitAction,
+}: {
+  onSubmitAction: (data: predictLandPricesValues) => void;
+}) {
+  const { isUserReady, user } = useUser();
 
   return (
-    <div className="relative rounded-4xl bg-gradient-to-b from-[#7057FF1F] to-transparent p-[1px]">
+    <div className="rounded-4xl bg-gradient-to-b from-[#7057FF1F] to-transparent p-[1px]">
       <div className="shadow-land-price rounded-4xl bg-white p-6 md:p-8">
         <DynamicForm
           inputs={inputsPredictLandPricesForm}
@@ -36,9 +36,8 @@ function WrapperForm() {
             <AuthDrawerDialog
               trigger={
                 <ButtonHover
-                  type={"submit"}
-                  containerClassName="max-w-[178px] max-md:max-w-full md:mt-8 mt-4 w-full"
-                  className="h-14 px-8 max-sm:text-xs"
+                  type={isUserReady && user ? "submit" : "button"}
+                  className="mt-4 h-14 w-full max-w-[178px] px-8 max-md:max-w-full max-sm:text-xs md:mt-8"
                   disabled={
                     form.formState.isSubmitting ||
                     !form.formState.isValid ||

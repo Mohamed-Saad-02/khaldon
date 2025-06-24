@@ -9,8 +9,7 @@ function TryNow() {
     <ButtonHover
       disabledMobile
       onClick={() => navToSection(routes.tryNow)}
-      containerClassName="w-full md:max-w-[150px]"
-      className="w-full"
+      className="w-full md:max-w-[150px]"
     >
       Try Now
     </ButtonHover>
