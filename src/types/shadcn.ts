@@ -1,7 +1,9 @@
 import { ComponentProps, ReactNode } from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
+import { ActionsProps } from "./form";
 
+// UseAvatar
 export interface UseAvatarProps {
   avatar?: ComponentProps<typeof AvatarPrimitive.Root>;
   avatarImage?: ComponentProps<typeof AvatarPrimitive.Image>;
@@ -11,6 +13,7 @@ export interface UseAvatarProps {
   name: string;
 }
 
+// UseDrawerDialog
 export interface UseDrawerDialogProps {
   trigger: React.ReactNode;
   content:
@@ -23,6 +26,7 @@ export interface UseDrawerDialogProps {
   enableDrawer?: boolean;
 }
 
+// UseSelect
 export interface UseSelectProps {
   items: { value: string; label: string }[];
   value?: string;
@@ -31,6 +35,7 @@ export interface UseSelectProps {
   icon?: ReactNode;
 }
 
+// User Popover
 export interface UsePopoverProps {
   trigger: ReactNode;
   content: ReactNode;
@@ -38,4 +43,20 @@ export interface UsePopoverProps {
   popover?: ComponentProps<typeof PopoverPrimitive.Root>;
   popoverTrigger?: ComponentProps<typeof PopoverPrimitive.Trigger>;
   popoverContent?: ComponentProps<typeof PopoverPrimitive.Content>;
+}
+
+// UserTabs
+export interface UseTabsProps<T extends string> {
+  defaultValue: T;
+  tabList: {
+    value: T;
+    label: string;
+    renderContent: (
+      value: T,
+      handleChange: (val: T) => void,
+      actions?: ActionsProps,
+    ) => React.ReactNode;
+  }[];
+  activeTabList?: boolean;
+  actions?: ActionsProps;
 }

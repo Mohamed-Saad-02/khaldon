@@ -24,20 +24,14 @@ export interface DynamicFormProps<
   onSubmitAction: (values: T, form: UseFormReturn<T, any, T>) => void;
   submitButtonText: string;
 
-  renderInput?: (
-    input: IInput<T>,
-    field: ControllerRenderProps<T, Path<T>>,
-    index: number,
-    actions?: Record<string, (...args: any[]) => any>,
-    form?: UseFormReturn<T, any, T>,
-  ) => ReactElement;
+  renderInput?: RenderInputProps<T>;
 
   buttonClass?: string;
   customSubmit?: CustomSubmitProps<T>;
 
   formClassName?: ComponentProps<typeof Form>["className"];
 
-  actions?: Record<string, (...args: any[]) => any>;
+  actions?: ActionsProps;
 }
 
 export type RenderInputProps<T extends Record<string, string | number | Date>> =
@@ -45,10 +39,12 @@ export type RenderInputProps<T extends Record<string, string | number | Date>> =
     input: IInput<T>,
     field: ControllerRenderProps<T, Path<T>>,
     index: number,
-    actions?: Record<string, (...args: any[]) => any>,
+    actions?: ActionsProps,
     form?: UseFormReturn<T, any, T>,
   ) => React.ReactElement;
 
 export type CustomSubmitProps<
   T extends Record<string, string | number | Date>,
 > = (form: UseFormReturn<T, any, T>) => ReactElement;
+
+export type ActionsProps = Record<string, (...args: any[]) => any>;

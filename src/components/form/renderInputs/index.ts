@@ -1,4 +1,4 @@
 export * from "./RenderInputPredictLandPricesForm";
-export * from "./RenderInputSign";
+export * from "./RenderInputLogin";
 export * from "./RenderInputConfirmEmail";
 export * from "./RenderInputResetPassword";

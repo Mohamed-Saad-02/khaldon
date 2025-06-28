@@ -1,14 +1,14 @@
-import { IInput } from "@/types";
-import { ControllerRenderProps } from "react-hook-form";
-import { signupValues, loginValues } from "@/lib/validator";
 import {
   FormControl,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { inputsLoginForm } from "@/constants";
+import { loginValues, signupValues } from "@/lib/validator";
+import { IInput } from "@/types";
+import { ControllerRenderProps } from "react-hook-form";
 import DynamicInput from "../DynamicInput";
-import { inputsSignForm } from "@/constants";
 
 export const RenderInputLogin = (
   input: IInput<signupValues | loginValues>,
@@ -24,7 +24,7 @@ export const RenderInputLogin = (
       </FormControl>
       <FormMessage />
 
-      {index === inputsSignForm.length - 1 && (
+      {index === inputsLoginForm.length - 1 && (
         <button
           type="button"
           className="text-default ms-auto mt-2 w-fit text-sm"

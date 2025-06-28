@@ -3,7 +3,7 @@ import {
   inputsResetPasswordForm,
 } from "@/constants";
 import { resetPasswordSchema, resetPasswordValues } from "@/lib/validator";
-import { SectionType } from "@/types";
+import { AuthTabType } from "@/types";
 import { UseFormReturn } from "react-hook-form";
 import { DynamicForm } from "./DynamicForm";
 import { RenderInputResetPassword } from "./renderInputs";
@@ -11,7 +11,7 @@ import { RenderInputResetPassword } from "./renderInputs";
 function ResetPasswordForm({
   selectSection,
 }: {
-  selectSection: (section: SectionType) => void;
+  selectSection: (section: AuthTabType) => void;
 }) {
   const onSubmitAction = (
     data: resetPasswordValues,

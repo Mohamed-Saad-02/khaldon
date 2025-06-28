@@ -3,14 +3,14 @@ import {
   inputsForgotPasswordForm,
 } from "@/constants";
 import { forgotPasswordSchema, forgotPasswordValues } from "@/lib/validator";
-import { SectionType } from "@/types";
+import { AuthTabType } from "@/types";
 import { UseFormReturn } from "react-hook-form";
 import { DynamicForm } from "./DynamicForm";
 
 function ForgotPasswordForm({
   selectSection,
 }: {
-  selectSection: (section: SectionType) => void;
+  selectSection: (section: AuthTabType) => void;
 }) {
   const onSubmitAction = (
     data: forgotPasswordValues,

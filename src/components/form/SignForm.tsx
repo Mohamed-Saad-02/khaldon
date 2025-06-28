@@ -1,16 +1,10 @@
-import { defaultValuesSignForm, inputsSignForm } from "@/constants";
-import { useUser } from "@/context/UserContext";
 import { cn } from "@/lib";
-import {
-  loginSchema,
-  loginValues,
-  signupSchema,
-  signupValues,
-} from "@/lib/validator";
-import { SectionType } from "@/types";
-import { Dispatch, SetStateAction, useState } from "react";
-import { DynamicForm } from "./DynamicForm";
-import { RenderInputLogin } from "./renderInputs/RenderInputSign";
+import { AuthTabType } from "@/types";
+import { Dispatch, SetStateAction, useMemo, useState } from "react";
+import LoginForm from "./LoginForm";
+import SignupForm from "./SignupForm";
+import AuthCard from "../cards/AuthCard";
+import Logo from "../Logo";
 
 type TabType = {
   setTab: Dispatch<SetStateAction<"signup" | "login">>;
@@ -34,59 +28,42 @@ const Tab = ({ setTab, currentTab, tab }: TabType) => (
 
 function SignForm({
   selectSection,
+  defaultTab,
 }: {
-  selectSection: (section: SectionType) => void;
+  selectSection: (section: AuthTabType) => void;
+  defaultTab?: "signup" | "login";
 }) {
-  const { saveUser } = useUser();
+  const [tab, setTab] = useState<"signup" | "login">(defaultTab);
 
-  const [tab, setTab] = useState<"signup" | "login">("signup");
-
-  const onSubmitAction = (
-    data: signupValues | loginValues,
-    // form: UseFormReturn<signupValues | loginValues>,
-  ) => {
-    console.log(data);
-
-    saveUser({
-      name: "Mohamed Saad",
-      id: "1",
-      email: data.email,
-    });
-  };
+  const tabsComponent = useMemo(
+    () => ({
+      signup: {
+        title: "Welcome! Let's get started",
+        content: <SignupForm />,
+      },
+      login: {
+        title: "Welcome! Let's get started",
+        content: <LoginForm actions={{ selectSection }} />,
+      },
+    }),
+    [],
+  );
 
   return (
-    <div>
+    <AuthCard
+      icon={
+        <Logo className="xl:h-[72px] xl:w-[230px]" width={230} height={72} />
+      }
+      title={tabsComponent[tab].title}
+      currentStepKey={tab}
+    >
       <div className="flex gap-4 rounded-[8px] border border-[#00000033] p-2">
         <Tab setTab={setTab} currentTab={tab} tab={"login"} />
         <Tab setTab={setTab} currentTab={tab} tab={"signup"} />
       </div>
 
-      <div className="mt-8 space-y-6">
-        {tab === "login" ? (
-          <DynamicForm
-            key={tab}
-            inputs={inputsSignForm}
-            formSchema={loginSchema}
-            defaultValues={defaultValuesSignForm}
-            onSubmitAction={onSubmitAction}
-            submitButtonText="Login"
-            buttonClass="w-full max-sm:text-xs mt-9"
-            renderInput={RenderInputLogin}
-            actions={{ selectSection }}
-          />
-        ) : (
-          <DynamicForm
-            key={tab}
-            inputs={inputsSignForm}
-            formSchema={signupSchema}
-            defaultValues={defaultValuesSignForm}
-            onSubmitAction={onSubmitAction}
-            submitButtonText="Signup"
-            buttonClass="mt-6 md:mt-[68px]"
-          />
-        )}
-      </div>
-    </div>
+      <div className="mt-8 space-y-6">{tabsComponent[tab].content}</div>
+    </AuthCard>
   );
 }
 

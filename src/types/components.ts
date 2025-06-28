@@ -1,5 +1,5 @@
 // AuthModel
-export type SectionType =
+export type AuthTabType =
   | "login"
   | "signup"
   | "forgotPassword"

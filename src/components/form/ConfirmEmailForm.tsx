@@ -1,5 +1,5 @@
 import { confirmEmailSchema, confirmEmailValues } from "@/lib/validator";
-import { SectionType } from "@/types";
+import { AuthTabType } from "@/types";
 import { UseFormReturn } from "react-hook-form";
 import { DynamicForm } from "./DynamicForm";
 
@@ -15,7 +15,7 @@ function ConfirmEmailForm({
   selectSection,
   email,
 }: {
-  selectSection: (section: SectionType) => void;
+  selectSection: (section: AuthTabType) => void;
   email: string;
 }) {
   const onSubmitAction = (

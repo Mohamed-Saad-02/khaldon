@@ -33,8 +33,26 @@ export const inputsPredictLandPricesForm: IInput<predictLandPricesValues>[] = [
   },
 ];
 
-// SignForm
-export const inputsSignForm: IInput<signupValues | loginValues>[] = [
+// SignupForm
+export const inputsSignupForm: IInput<signupValues>[] = [
+  {
+    formName: "email",
+    label: "Email",
+    type: "email",
+    placeholder: "Enter your email",
+    autoComplete: "email",
+  },
+  {
+    formName: "password",
+    label: "Password",
+    type: "password",
+    placeholder: "Enter your password",
+    autoComplete: "current-password",
+  },
+];
+
+// LoginForm
+export const inputsLoginForm: IInput<loginValues>[] = [
   {
     formName: "email",
     label: "Email",

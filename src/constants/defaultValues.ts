@@ -4,8 +4,16 @@ export const defaultValuesPredictLandPricesForm = {
   year: "2014",
 };
 
-// SignForm
-export const defaultValuesSignForm = {
+// SignupForm
+export const defaultValuesSignupForm = {
+  email: "",
+  password: "",
+  firstName: "",
+  lastName: "",
+};
+
+// LoginForm
+export const defaultValuesLoginForm = {
   email: "",
   password: "",
 };
