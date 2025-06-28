@@ -95,7 +95,7 @@ function SignupForm() {
     {
       value: "nameInfo",
       label: "Personal Info",
-      renderContent: (currentTab, setTab) => (
+      renderContent: () => (
         <div className="space-y-4 pt-4">
           <FormField
             control={form.control}

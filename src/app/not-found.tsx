@@ -14,7 +14,8 @@ export default function NotFound() {
             Page not found
           </h1>
           <p className="text-[#808080] md:text-lg">
-            Uh oh, we can't seem to find the page you're looking for.{" "}
+            Uh oh, we can&apos;t seem to find the page you&apos;re looking
+            for.{" "}
           </p>
         </Container>
 

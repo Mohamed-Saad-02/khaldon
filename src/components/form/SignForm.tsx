@@ -33,7 +33,7 @@ function SignForm({
   selectSection: (section: AuthTabType) => void;
   defaultTab?: "signup" | "login";
 }) {
-  const [tab, setTab] = useState<"signup" | "login">(defaultTab);
+  const [tab, setTab] = useState<"signup" | "login">(defaultTab || "signup");
 
   const tabsComponent = useMemo(
     () => ({

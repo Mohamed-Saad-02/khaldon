@@ -8,11 +8,11 @@ import NotFoundImage from "@/assets/images/notfound.webp";
 
 export default function ErrorPage({
   error,
-  reset,
 }: {
   error: Error & { digest?: string };
-  reset: () => void;
 }) {
+  if (process.env.NEXT_PUBLIC_DEVELOPMENT) console.log(error.message);
+
   return (
     <div className="flex min-h-[calc(100vh-80px)] items-center justify-center py-[100px] max-md:py-[50px]">
       <div className="flex-1">
