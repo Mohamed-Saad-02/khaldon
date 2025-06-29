@@ -1,4 +1,4 @@
-import { ComponentProps, ReactNode } from "react";
+import { ComponentProps, JSX, ReactNode } from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { ActionsProps } from "./form";
@@ -35,7 +35,7 @@ export interface UseSelectProps {
   icon?: ReactNode;
 }
 
-// User Popover
+// UsePopover
 export interface UsePopoverProps {
   trigger: ReactNode;
   content: ReactNode;
@@ -45,7 +45,7 @@ export interface UsePopoverProps {
   popoverContent?: ComponentProps<typeof PopoverPrimitive.Content>;
 }
 
-// UserTabs
+// UseTabs
 export interface UseTabsProps<T extends string> {
   defaultValue: T;
   tabList: {
@@ -60,3 +60,19 @@ export interface UseTabsProps<T extends string> {
   activeTabList?: boolean;
   actions?: ActionsProps;
 }
+
+// UseToast
+export type ToastType = "success" | "info" | "error" | "warning";
+export type ToastProps = {
+  title: string;
+  description: string;
+};
+export type ToastConfig = Record<
+  ToastType,
+  {
+    icon: JSX.Element;
+    color: string;
+    bgClass: string;
+    borderClass: string;
+  }
+>;

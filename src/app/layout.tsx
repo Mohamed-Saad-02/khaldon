@@ -3,8 +3,9 @@ import Header from "@/components/header/Header";
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 
-import "@/styles/globals.css";
+import AppGlobals from "@/components/AppGlobals";
 import { UserProvider } from "@/context/UserContext";
+import "@/styles/globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
@@ -29,6 +30,8 @@ export default function RootLayout({
         <UserProvider>
           <Header />
           <main>{children}</main>
+
+          <AppGlobals />
           <Footer />
         </UserProvider>
       </body>

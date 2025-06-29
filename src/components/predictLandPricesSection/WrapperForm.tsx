@@ -13,6 +13,7 @@ import {
   inputsPredictLandPricesForm,
   defaultValuesPredictLandPricesForm,
 } from "@/constants";
+import useIsOnline from "@/hooks/useIsOnline";
 
 function WrapperForm({
   onSubmitAction,
@@ -20,6 +21,7 @@ function WrapperForm({
   onSubmitAction: (data: predictLandPricesValues) => void;
 }) {
   const { isUserReady, user } = useUser();
+  const isOnline = useIsOnline();
 
   return (
     <div className="rounded-4xl bg-gradient-to-b from-[#7057FF1F] to-transparent p-[1px]">
@@ -41,7 +43,8 @@ function WrapperForm({
                   disabled={
                     form.formState.isSubmitting ||
                     !form.formState.isValid ||
-                    !isUserReady // User can't click in button when user data start loading
+                    !isUserReady || // User can't click in button when user data start loading
+                    !isOnline // User can't click in button if offline
                   }
                   disabledMobile
                 >
