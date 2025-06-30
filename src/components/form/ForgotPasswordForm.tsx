@@ -6,19 +6,26 @@ import { forgotPasswordSchema, forgotPasswordValues } from "@/lib/validator";
 import { AuthTabType } from "@/types";
 import { UseFormReturn } from "react-hook-form";
 import { DynamicForm } from "./DynamicForm";
+import { useForgotPassword } from "@/hooks/useAuth";
 
 function ForgotPasswordForm({
   selectSection,
 }: {
   selectSection: (section: AuthTabType) => void;
 }) {
+  const { mutate, isPending } = useForgotPassword();
+
   const onSubmitAction = (
     data: forgotPasswordValues,
     form: UseFormReturn<forgotPasswordValues>,
   ) => {
-    selectSection("confirmEmail");
-    console.log(data);
-    console.log(form);
+    mutate(data, {
+      onSuccess: () => {
+        sessionStorage.setItem("email", data.email);
+        selectSection("confirmEmail");
+      },
+      onError: () => form.reset(),
+    });
   };
 
   return (
@@ -29,6 +36,7 @@ function ForgotPasswordForm({
       onSubmitAction={onSubmitAction}
       submitButtonText="Send OTP"
       buttonClass="w-full md:mt-9"
+      isPending={isPending}
     />
   );
 }

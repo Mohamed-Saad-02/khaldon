@@ -1,5 +1,5 @@
 import { cn } from "@/lib";
-import { AuthTabType } from "@/types";
+import { ActionsProps, AuthTabType } from "@/types";
 import { Dispatch, SetStateAction, useMemo, useState } from "react";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
@@ -27,11 +27,13 @@ const Tab = ({ setTab, currentTab, tab }: TabType) => (
 );
 
 function SignForm({
-  selectSection,
   defaultTab,
+  actions,
+  selectSection,
 }: {
-  selectSection: (section: AuthTabType) => void;
   defaultTab?: "signup" | "login";
+  actions: ActionsProps;
+  selectSection: (section: AuthTabType) => void;
 }) {
   const [tab, setTab] = useState<"signup" | "login">(defaultTab || "signup");
 
@@ -39,11 +41,11 @@ function SignForm({
     () => ({
       signup: {
         title: "Welcome! Let's get started",
-        content: <SignupForm />,
+        content: <SignupForm selectSection={selectSection} />,
       },
       login: {
         title: "Welcome! Let's get started",
-        content: <LoginForm actions={{ selectSection }} />,
+        content: <LoginForm actions={{ ...actions, selectSection }} />,
       },
     }),
     [],

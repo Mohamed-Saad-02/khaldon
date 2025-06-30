@@ -13,6 +13,9 @@ export const RenderInputConfirmEmail = (
   _input: IInput<confirmEmailValues>,
   field: ControllerRenderProps<confirmEmailValues>,
   index: number,
+  actions?: {
+    resendOTP?: () => void;
+  },
 ) => {
   return (
     <FormItem className="gap-1">
@@ -43,7 +46,11 @@ export const RenderInputConfirmEmail = (
       {index === inputsConfirmEmailForm.length - 1 && (
         <div className="mt-8 flex items-center justify-between">
           <p className="text-[#B3B3B3]">Didn&apos;t get the OTP?</p>
-          <button type="button" className="text-default">
+          <button
+            type="button"
+            className="text-default"
+            onClick={actions?.resendOTP}
+          >
             Resend OTP via Email
           </button>
         </div>

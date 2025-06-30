@@ -1,12 +1,13 @@
-import { User } from "@/types";
+import { useUser } from "@/context/UserContext";
 import { Separator } from "@radix-ui/react-select";
 import { Key, LogOut } from "lucide-react";
 import UseAvatar from "../UsedShadcn/UseAvatar";
 import UsePopover from "../UsedShadcn/UsePopover";
-import { useUser } from "@/context/UserContext";
 
-function ProfileAvatar({ user }: { user: User }) {
-  const { logout } = useUser();
+function ProfileAvatar() {
+  const { user, logout } = useUser();
+
+  if (!user) return;
 
   return (
     <UsePopover

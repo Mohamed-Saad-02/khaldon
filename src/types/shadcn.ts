@@ -59,6 +59,7 @@ export interface UseTabsProps<T extends string> {
   }[];
   activeTabList?: boolean;
   actions?: ActionsProps;
+  onValueChange?: (value: T) => void;
 }
 
 // UseToast

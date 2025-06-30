@@ -42,7 +42,9 @@ const mokeData = {
 export const predictLandPrices = (
   dataForm: predictLandPricesValues | null,
 ): Promise<Data> => {
-  console.log(dataForm);
+  if (process.env.NODE_ENV === "development") {
+    console.log(dataForm);
+  }
 
   return new Promise((resolve) => {
     setTimeout(() => {

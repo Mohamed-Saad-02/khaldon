@@ -32,6 +32,8 @@ export interface DynamicFormProps<
   formClassName?: ComponentProps<typeof Form>["className"];
 
   actions?: ActionsProps;
+
+  isPending?: boolean;
 }
 
 export type RenderInputProps<T extends Record<string, string | number | Date>> =

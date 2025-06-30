@@ -7,19 +7,23 @@ import { AuthTabType } from "@/types";
 import { UseFormReturn } from "react-hook-form";
 import { DynamicForm } from "./DynamicForm";
 import { RenderInputResetPassword } from "./renderInputs";
+import { useResetPassword } from "@/hooks/useAuth";
 
 function ResetPasswordForm({
   selectSection,
 }: {
   selectSection: (section: AuthTabType) => void;
 }) {
+  const { isPending, mutate } = useResetPassword();
+
   const onSubmitAction = (
     data: resetPasswordValues,
     form: UseFormReturn<resetPasswordValues>,
   ) => {
-    console.log(data);
-    console.log(form);
-    selectSection("login");
+    mutate(data, {
+      onSuccess: () => selectSection("login"),
+      onError: () => form.reset(),
+    });
   };
 
   return (
@@ -32,6 +36,7 @@ function ResetPasswordForm({
         submitButtonText="Reset Password"
         buttonClass="w-full max-sm:text-xs mt-6 md:-mb-4"
         renderInput={RenderInputResetPassword}
+        isPending={isPending}
       />
     </div>
   );

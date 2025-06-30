@@ -2,7 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Path, useForm } from "react-hook-form";
-// Fix: Use the correct casing for the Button import
 import { Button } from "@/components/ui/Button";
 import {
   Form,
@@ -13,12 +12,19 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { defaultValuesSignupForm } from "@/constants";
+import { defaultValuesSignupForm, OTP_TYPE } from "@/constants";
 import { signupSchema, signupValues } from "@/lib/validator";
-import { UseTabsProps } from "@/types";
+import { AuthTabType, UseTabsProps } from "@/types";
 import UseTabs from "../UsedShadcn/UseTabs";
+import { useRegister } from "@/hooks/useAuth";
 
-function SignupForm() {
+function SignupForm({
+  selectSection,
+}: {
+  selectSection: (section: AuthTabType) => void;
+}) {
+  const { mutate, isPending } = useRegister();
+
   const form = useForm<signupValues>({
     resolver: zodResolver(signupSchema),
     defaultValues: defaultValuesSignupForm,
@@ -26,7 +32,19 @@ function SignupForm() {
   });
 
   const onSubmit = (data: signupValues) => {
-    console.log("Form submitted:", data);
+    mutate(data, {
+      onSuccess: () => {
+        selectSection("confirmEmail");
+        sessionStorage.setItem("email", data.email);
+      },
+      onError: (err: string) => {
+        if (err === "Please verify your email first") {
+          sessionStorage.setItem("email", data.email);
+          sessionStorage.setItem("OTP_TYPE", OTP_TYPE.CONFIRM_EMAIL);
+          selectSection("confirmEmail");
+        }
+      },
+    });
   };
 
   const handleNext = (
@@ -51,12 +69,12 @@ function SignupForm() {
       value: "emailPassword",
       label: "Account",
       renderContent: (currentTab, setTab) => (
-        <div className="space-y-4 pt-4">
+        <div className="space-y-4">
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="gap-1">
                 <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input placeholder="Enter your email" {...field} />
@@ -69,7 +87,7 @@ function SignupForm() {
             control={form.control}
             name="password"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="gap-1">
                 <FormLabel>Password</FormLabel>
                 <FormControl>
                   <Input
@@ -85,7 +103,7 @@ function SignupForm() {
           <Button
             type="button"
             onClick={() => handleNext(currentTab, setTab)}
-            className="w-full"
+            className="mt-17 w-full max-sm:text-xs"
           >
             Continue
           </Button>
@@ -96,12 +114,12 @@ function SignupForm() {
       value: "nameInfo",
       label: "Personal Info",
       renderContent: () => (
-        <div className="space-y-4 pt-4">
+        <div className="space-y-4">
           <FormField
             control={form.control}
             name="firstName"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="gap-1">
                 <FormLabel>First Name</FormLabel>
                 <FormControl>
                   <Input placeholder="Enter your first name" {...field} />
@@ -114,7 +132,7 @@ function SignupForm() {
             control={form.control}
             name="lastName"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="gap-1">
                 <FormLabel>Last Name</FormLabel>
                 <FormControl>
                   <Input placeholder="Enter your last name" {...field} />
@@ -123,7 +141,11 @@ function SignupForm() {
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full">
+          <Button
+            type="submit"
+            className="mt-17 w-full max-sm:text-xs"
+            disabled={isPending}
+          >
             Submit
           </Button>
         </div>

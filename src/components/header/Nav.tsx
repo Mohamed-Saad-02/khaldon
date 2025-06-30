@@ -50,7 +50,7 @@ function Nav() {
         </ul>
 
         {/* Profile */}
-        <div>{user ? <ProfileAvatar user={user} /> : <Signup />}</div>
+        <div>{user ? <ProfileAvatar /> : <Signup />}</div>
 
         {/* Menu and X */}
         <button className="text-primary sm:hidden" onClick={toggleNav}>

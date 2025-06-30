@@ -7,6 +7,8 @@ import AppGlobals from "@/components/AppGlobals";
 import { UserProvider } from "@/context/UserContext";
 import "@/styles/globals.css";
 
+import AppLayout from "@/layout/AppLayout";
+
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
   subsets: ["latin"],
@@ -27,13 +29,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakartaSans.variable} antialiased`}>
       <body>
-        <UserProvider>
-          <Header />
-          <main>{children}</main>
+        <AppLayout>
+          <UserProvider>
+            <Header />
+            <main>{children}</main>
 
-          <AppGlobals />
-          <Footer />
-        </UserProvider>
+            <AppGlobals />
+            <Footer />
+          </UserProvider>
+        </AppLayout>
       </body>
     </html>
   );

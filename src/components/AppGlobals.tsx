@@ -5,6 +5,7 @@ function AppGlobals() {
   return (
     <>
       <Toaster
+        duration={5000}
         position="top-right"
         className="!font-sans"
         toastOptions={{

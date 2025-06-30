@@ -26,6 +26,7 @@ function DynamicForm<T extends Record<string, string | number | Date>>({
   actions,
   formClassName,
   customSubmit,
+  isPending,
 }: DynamicFormProps<T>) {
   const form = useForm<T>({
     resolver: zodResolver(formSchema),
@@ -78,7 +79,11 @@ function DynamicForm<T extends Record<string, string | number | Date>>({
           <Button
             type="submit"
             className={cn("w-full", buttonClass)}
-            disabled={form.formState.isSubmitting || !form.formState.isValid}
+            disabled={
+              form.formState.isSubmitting ||
+              !form.formState.isValid ||
+              isPending
+            }
           >
             {submitButtonText}
           </Button>

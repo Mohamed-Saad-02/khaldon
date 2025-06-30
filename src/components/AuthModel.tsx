@@ -19,15 +19,23 @@ const tabList: UseTabsProps<AuthTabType>["tabList"] = [
   {
     value: "login",
     label: "Login",
-    renderContent: (_, handleChange) => (
-      <SignForm selectSection={handleChange} defaultTab="login" />
+    renderContent: (_, handleChange, actions) => (
+      <SignForm
+        selectSection={handleChange}
+        defaultTab="login"
+        actions={actions!}
+      />
     ),
   },
   {
     value: "signup",
     label: "Create an account",
-    renderContent: (_, handleChange) => (
-      <SignForm selectSection={handleChange} defaultTab="signup" />
+    renderContent: (_, handleChange, actions) => (
+      <SignForm
+        defaultTab="signup"
+        actions={actions!}
+        selectSection={handleChange}
+      />
     ),
   },
   {
@@ -62,10 +70,7 @@ const tabList: UseTabsProps<AuthTabType>["tabList"] = [
         subtitle="Enter the 4-digit OTP sent to"
         currentStepKey="confirmEmail"
       >
-        <ConfirmEmailForm
-          selectSection={handleChange}
-          email="example...@gmail.com"
-        />
+        <ConfirmEmailForm selectSection={handleChange} />
       </AuthCard>
     ),
   },

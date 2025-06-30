@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import * as jwt from "jwt-decode";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -19,8 +20,6 @@ export function navToSection(
 
 // check password rules
 export function checkPasswordRules(password: string) {
-  console.log(password);
-
   return {
     minLength: password.length >= 8,
     hasUppercase: /[A-Z]/.test(password),
@@ -28,4 +27,15 @@ export function checkPasswordRules(password: string) {
     hasNumber: /[0-9]/.test(password),
     hasSpecialChar: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password),
   };
+}
+
+// Decode Token
+export function decodeToken(token: string) {
+  try {
+    const decoded = jwt.jwtDecode(token);
+    return decoded;
+  } catch (error) {
+    console.error("Error decoding token:", error);
+    return null;
+  }
 }

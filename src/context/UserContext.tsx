@@ -8,6 +8,8 @@ import {
   useState,
 } from "react";
 import { User, UserContextType } from "@/types";
+import { decodeToken } from "@/lib";
+import showToast from "@/components/UsedShadcn/UseToast";
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
@@ -15,23 +17,30 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isUserReady, setIsUserReady] = useState(false);
 
-  const saveUser = async (user: User) => {
+  const saveUser = async (token: string) => {
+    if (!token) return;
+
+    const user = decodeToken(token) as User;
     setUser(user);
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("token", token);
+    showToast({
+      title: `Welcome ${user.name}`,
+      description: "You are logged in",
+    }).success();
   };
 
   const logout = () => {
     if (isUserReady && !user) return;
 
     setUser(null);
-    localStorage.removeItem("user");
+    localStorage.removeItem("token");
   };
 
   useLayoutEffect(() => {
-    const stored = localStorage.getItem("user");
+    const stored = localStorage.getItem("token");
     if (stored) {
       try {
-        setUser(JSON.parse(stored));
+        setUser(decodeToken(stored) as User);
       } catch (err) {
         console.error("Invalid user data in localStorage", err);
       } finally {
