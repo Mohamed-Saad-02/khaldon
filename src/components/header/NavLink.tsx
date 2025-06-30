@@ -14,7 +14,6 @@ function NavLink({ link, index, onClick }: NavLinkProps) {
   return (
     <li
       key={link.name}
-      role="button"
       className="cursor-pointer max-sm:py-2.5"
       onClick={handleClick}
     >

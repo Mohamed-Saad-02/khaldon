@@ -47,6 +47,7 @@ function WrapperForm({
                     !isOnline // User can't click in button if offline
                   }
                   disabledMobile
+                  aria-label="Predict Price"
                 >
                   Predict Price
                 </ButtonHover>

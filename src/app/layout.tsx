@@ -19,6 +19,8 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: "Khaldon",
+  description:
+    "A real estate landing page with home listings, price prediction, and user authentication.",
 };
 
 export default function RootLayout({

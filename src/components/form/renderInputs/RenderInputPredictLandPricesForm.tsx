@@ -42,6 +42,7 @@ export const RenderInputPredictLandPricesForm = (
             max={Number(input.max)}
             value={field.value}
             onChange={(e) => field.onChange(e.target.value)}
+            id={input.formName}
           />
         ) : input.type === "select" ? (
           <UseSelect
