@@ -1,6 +1,5 @@
 import { useUser } from "@/context/UserContext";
-import { Separator } from "@radix-ui/react-select";
-import { Key, LogOut } from "lucide-react";
+import { LogOut } from "lucide-react";
 import UseAvatar from "../UsedShadcn/UseAvatar";
 import UsePopover from "../UsedShadcn/UsePopover";
 
@@ -24,11 +23,11 @@ function ProfileAvatar() {
         <div className="space-y-3">
           <h5 className="text-xs text-[#969792]">Account</h5>
           <div className="space-y-3 px-4 text-sm">
-            <button className="text-txt flex items-center gap-2">
+            {/* <button className="text-txt flex items-center gap-2">
               <Key size={18} />
               My API Key
             </button>
-            <Separator className="border" />
+            <Separator className="border" /> */}
             <button
               className="flex items-center gap-2 text-red-600"
               onClick={logout}

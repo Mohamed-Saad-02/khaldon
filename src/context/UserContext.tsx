@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 import { User, UserContextType } from "@/types";
-import { decodeToken } from "@/lib";
+import { decodeToken, isTokenExpired } from "@/lib";
 import showToast from "@/components/UsedShadcn/UseToast";
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -40,6 +40,11 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     const stored = localStorage.getItem("token");
     if (stored) {
       try {
+        const isExpired = isTokenExpired(stored);
+        if (isExpired) {
+          logout();
+          return;
+        }
         setUser(decodeToken(stored) as User);
       } catch (err) {
         console.error("Invalid user data in localStorage", err);

@@ -43,7 +43,10 @@ export const authService = {
 
   // Confirm email
   confirmEmail: async (data: confirmEmailValues & { email: string }) => {
-    const response = await axiosInstance.post("/auth/verify-user", data);
+    const response = await axiosInstance.post("/auth/verify-user", {
+      ...data,
+      type: OTP_TYPE.CONFIRM_EMAIL,
+    });
     return response;
   },
 

@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import * as jwt from "jwt-decode";
+import showToast from "@/components/UsedShadcn/UseToast";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -33,9 +34,39 @@ export function checkPasswordRules(password: string) {
 export function decodeToken(token: string) {
   try {
     const decoded = jwt.jwtDecode(token);
+
     return decoded;
   } catch (error) {
     console.error("Error decoding token:", error);
     return null;
   }
 }
+
+// Check token expiration
+export function isTokenExpired(token: string) {
+  const decoded = decodeToken(token);
+  if (!decoded) return true;
+
+  const expirationTime = decoded.exp! * 1000;
+  return expirationTime < Date.now();
+}
+
+// auto logout
+export function autoLogout() {
+  const token = localStorage.getItem("token");
+  if (token && isTokenExpired(token)) {
+    localStorage.removeItem("token");
+    showToast({
+      title: "Session Expired",
+      description: "You have been logged out due to inactivity.",
+    }).error();
+  }
+}
+
+// Price
+export const formattedPrice = (number: number) =>
+  number.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  });

@@ -1,22 +1,26 @@
-import { cn } from "@/lib";
+import { cn, formattedPrice } from "@/lib";
 import StateSkelton from "../skeleton/predictLandPricesSection/StateSkelton";
 import { StatType } from "@/types";
 
 interface StatProps {
-  stat: StatType;
-  index: number;
+  stat: {
+    title: string;
+    price: string;
+    description: string;
+    index: number;
+  };
   isLoading: boolean;
 }
 
-function Stat({ stat, index, isLoading }: StatProps) {
-  const { title, price, description } = stat || {};
+function Stat({ stat, isLoading }: StatProps) {
+  const { title, price, description, index } = stat || {};
 
   if (isLoading) return <StateSkelton state={stat} index={index} />;
 
   return (
     <div
       className={cn(
-        "bg-primary/10 grid place-items-center space-y-3 rounded-2xl px-21 py-8 text-center xl:py-14",
+        "bg-primary/10 grid place-items-center space-y-3 rounded-2xl px-8 py-12 text-center xl:px-21 xl:py-14",
       )}
     >
       <div className="text-default text-lg font-bold">{title}</div>
@@ -43,46 +47,41 @@ function Stat({ stat, index, isLoading }: StatProps) {
 }
 
 function PredictLandPricesStats({
-  stats,
+  stat,
   isLoading,
 }: {
-  stats: StatType[];
+  stat: StatType;
   isLoading: boolean;
 }) {
-  const currentData = isLoading
-    ? [
-        {
-          title: "Predicted Price",
-          description: "per square meter",
-          price: "",
-          index: 0,
-        },
-        {
-          title: "Confidence Level",
-          description: "",
-          price: "",
-          index: 1,
-        },
-        {
-          title: "Price Range",
-          description: "estimated range",
-          price: "",
-          index: 2,
-        },
-      ]
-    : stats;
+  const currentData = [
+    {
+      title: "Predicted Price",
+      description: "per square meter",
+      price: isLoading ? "" : formattedPrice(stat.predictPrice),
+      index: 0,
+    },
+    {
+      title: "Confidence Level",
+      description: `${Math.round(stat.confidenceLevel) * 100}% confidence`,
+      price: isLoading ? "" : String(stat.confidenceLevel * 100),
+      index: 1,
+    },
+    {
+      title: "Price Range",
+      description: "estimated range",
+      price: isLoading
+        ? ""
+        : `${formattedPrice(stat.priceRange[0])} - ${formattedPrice(stat.priceRange[1])}`,
+      index: 2,
+    },
+  ];
 
-  if (!isLoading && !stats.length) return;
+  if (!isLoading && !stat) return;
 
   return (
-    <div className="shadow-secondary grid grid-cols-3 gap-x-8 gap-y-4 rounded-4xl border border-[#D9D9D980] p-8">
+    <div className="shadow-secondary grid gap-x-8 gap-y-4 rounded-4xl border border-[#D9D9D980] p-8 md:grid-cols-2 lg:grid-cols-3">
       {currentData.map((stat, index) => (
-        <Stat
-          key={index}
-          stat={stat}
-          index={index}
-          isLoading={isLoading || !stats.length}
-        />
+        <Stat key={index} stat={stat} isLoading={isLoading} />
       ))}
     </div>
   );

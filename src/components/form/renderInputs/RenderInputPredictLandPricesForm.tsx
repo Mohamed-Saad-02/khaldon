@@ -1,3 +1,4 @@
+import LocationIcon from "@/assets/icons/location.svg";
 import DynamicInput from "@/components/form/DynamicInput";
 import InputRange from "@/components/form/InputRange";
 import {
@@ -11,7 +12,6 @@ import { predictLandPricesValues } from "@/lib/validator";
 import { IInput } from "@/types";
 import Image from "next/image";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
-import LocationIcon from "@/assets/icons/location.svg";
 
 export const RenderInputPredictLandPricesForm = (
   input: IInput<predictLandPricesValues>,

@@ -1,6 +1,6 @@
 "use client";
 
-import { useUser } from "@/context/UserContext";
+import { usePredictLandFormLogic } from "@/hooks/logic/usePredictLandFormLogic";
 import {
   predictLandPricesSchema,
   predictLandPricesValues,
@@ -9,27 +9,32 @@ import ButtonHover from "../buttons/ButtonHover";
 import AuthDrawerDialog from "../drawerDialog/AuthDrawerDialog";
 import { DynamicForm } from "../form/DynamicForm";
 import { RenderInputPredictLandPricesForm } from "../form/renderInputs";
-import {
-  inputsPredictLandPricesForm,
-  defaultValuesPredictLandPricesForm,
-} from "@/constants";
-import useIsOnline from "@/hooks/useIsOnline";
+import { Skeleton } from "../ui/skeleton";
 
 function WrapperForm({
   onSubmitAction,
 }: {
   onSubmitAction: (data: predictLandPricesValues) => void;
 }) {
-  const { isUserReady, user } = useUser();
-  const isOnline = useIsOnline();
+  const {
+    inputs,
+    defaultValues,
+    isLoading,
+    isPending,
+    isUserReady,
+    user,
+    isOnline,
+  } = usePredictLandFormLogic();
+
+  if (isLoading) return <Skeleton className="h-[200px]" />;
 
   return (
     <div className="rounded-4xl bg-gradient-to-b from-[#7057FF1F] to-transparent p-[1px]">
       <div className="shadow-land-price rounded-4xl bg-white p-6 md:p-8">
         <DynamicForm
-          inputs={inputsPredictLandPricesForm}
+          inputs={isPending ? [] : inputs}
           formSchema={predictLandPricesSchema}
-          defaultValues={defaultValuesPredictLandPricesForm}
+          defaultValues={defaultValues}
           onSubmitAction={onSubmitAction}
           submitButtonText="Predict Price"
           formClassName="flex items-center gap-4 md:gap-8 space-y-0 flex-wrap"

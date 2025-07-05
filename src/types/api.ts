@@ -33,12 +33,35 @@ export interface User {
 }
 
 export type StatType = {
-  title: string;
-  price: string;
-  description: string;
+  predictPrice: number;
+  confidenceLevel: number;
+  priceRange: number[];
 };
 
 export type ChartData = {
   name: string;
-  price: number;
+  actualPrice: number;
+  predictPrice: number;
 };
+
+// Locations
+export type Region = {
+  _id: string;
+  name: string;
+};
+
+export type LocationsSummary = {
+  regions: Region[];
+  years: number[];
+};
+export type LocationsSummaryResponse = ApiResponse<LocationsSummary>;
+
+export type LocationPrices = {
+  _id: string;
+  year: number;
+  half: "H1" | "H2" | "Full";
+  actualPrice: number;
+  predictedPrice: number;
+  percentage: number;
+};
+export type LocationPricesResponse = ApiResponse<LocationPrices[]>;

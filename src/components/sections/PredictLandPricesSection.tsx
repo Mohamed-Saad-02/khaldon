@@ -4,46 +4,13 @@ import { routes } from "@/routes";
 import Section from "../ui/Section";
 import TitleSection from "../ui/TitleSection";
 
+import { usePredictLandPricesSectionLogic } from "@/hooks/logic/usePredictLandPricesSectionLogic";
 import PredictLandPricesWrapperData from "../predictLandPricesSection/PredictLandPricesWrapperData";
 import WrapperForm from "../predictLandPricesSection/WrapperForm";
-import { predictLandPricesValues } from "@/lib/validator";
-import { Data, predictLandPrices } from "@/service/predictLandPrices";
-import { useUser } from "@/context/UserContext";
-import { useState, useEffect } from "react";
 
 function PredictLandPricesSection() {
-  const { user } = useUser();
-
-  const [dataForm, setDataForm] = useState<predictLandPricesValues | null>(
-    null,
-  );
-  const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState<Data | null>(null);
-
-  const onSubmitAction = (data: predictLandPricesValues) => {
-    if (!user) return;
-
-    setDataForm(data);
-    setData(null);
-  };
-
-  useEffect(() => {
-    if (dataForm || user) {
-      const getData = async () => {
-        try {
-          setIsLoading(true);
-          const data = await predictLandPrices(dataForm);
-          setData(data);
-        } catch (error) {
-          console.error("Error fetching prediction:", error);
-        } finally {
-          setIsLoading(false);
-        }
-      };
-
-      getData();
-    }
-  }, [dataForm, user]);
+  const { user, locationPrices, isLoadingLocationPrices, onSubmitAction } =
+    usePredictLandPricesSectionLogic();
 
   return (
     <Section className="space-y-12" id={routes.tryNow}>
@@ -55,7 +22,10 @@ function PredictLandPricesSection() {
       <WrapperForm onSubmitAction={onSubmitAction} />
 
       {user && (
-        <PredictLandPricesWrapperData data={data} isLoading={isLoading} />
+        <PredictLandPricesWrapperData
+          data={locationPrices}
+          isLoading={isLoadingLocationPrices}
+        />
       )}
     </Section>
   );

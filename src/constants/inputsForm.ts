@@ -28,7 +28,7 @@ export const inputsPredictLandPricesForm: IInput<predictLandPricesValues>[] = [
     type: "range",
     placeholder: "Select year",
     autoComplete: "year",
-    min: 2014,
+    min: 2020,
     max: 2030,
   },
 ];

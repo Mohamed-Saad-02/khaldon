@@ -20,7 +20,11 @@ function UseSelect({
   return (
     <div className="border-input flex h-12 items-center gap-2 rounded-[8px] border p-3 md:h-14">
       {icon && icon}
-      <ShadcnSelect value={value} onValueChange={(v) => onChange(v as string)}>
+      <ShadcnSelect
+        value={value}
+        onValueChange={(v) => onChange(v as string)}
+        defaultValue={value}
+      >
         <SelectTrigger
           className={cn(
             "text-default min-h-12 border-none text-sm shadow-none md:text-base",

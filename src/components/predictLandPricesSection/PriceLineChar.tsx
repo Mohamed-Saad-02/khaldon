@@ -14,14 +14,18 @@ import {
 
 function PriceLineChar({
   chartData,
+  priceTrend,
   isLoading,
 }: {
   chartData: ChartData[];
+  priceTrend: number;
   isLoading: boolean;
 }) {
   return (
-    <div className="shadow-secondary text-default space-y-4 rounded-4xl border border-[#D9D9D980] p-8">
-      <h3 className="text-2xl font-medium">Price Trend (10 Years)</h3>
+    <div className="shadow-secondary text-default space-y-4 overflow-hidden rounded-4xl border border-[#D9D9D980] p-4 md:p-8">
+      <h3 className="text-lg font-medium md:text-2xl">
+        Price Trend ({priceTrend} Years)
+      </h3>
 
       {isLoading ? (
         <div className="grid h-[527px] place-content-center rounded-2xl bg-[#E6E6E6]">
@@ -37,7 +41,8 @@ function PriceLineChar({
             <XAxis dataKey="name" />
             <YAxis />
             <Tooltip />
-            <Line type="monotone" dataKey="price" stroke="#7b9b10" />
+            <Line type="monotone" dataKey="predictPrice" stroke="#4b85f5" />
+            <Line type="monotone" dataKey="actualPrice" stroke="#7b9b10" />
           </LineChart>
         </ResponsiveContainer>
       )}
