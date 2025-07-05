@@ -9,6 +9,8 @@ function PredictLandPricesWrapperData({
   data: LocationPrices[] | null;
   isLoading: boolean;
 }) {
+  if (!isLoading && !data) return;
+
   // Stats
   // Extract arrays
   const predictedPrices = data?.map((d) => d.predictedPrice) || [];

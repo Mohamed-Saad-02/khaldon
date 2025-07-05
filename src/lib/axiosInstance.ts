@@ -1,3 +1,4 @@
+import showToast from "@/components/UsedShadcn/UseToast";
 import axios from "axios";
 
 const instance = axios.create({
@@ -24,6 +25,17 @@ instance.interceptors.response.use(
     return response.data;
   },
   (error) => {
+    if (
+      error.response.status === 401 &&
+      error?.response?.data?.error === "Invalid token"
+    ) {
+      localStorage.removeItem("token");
+      showToast({
+        title: "Session Expired",
+        description: "Please login again",
+      }).error();
+    }
+
     return Promise.reject(error?.response?.data?.error || "Failed");
   },
 );
